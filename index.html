@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Save the Golden Lion Tamarin 🦁 | Birdrock Elementary</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F4A822;
+    --deep-gold: #C97D10;
+    --orange: #E8631A;
+    --green: #2E7D32;
+    --light-green: #4CAF50;
+    --cream: #FFF8EE;
+    --brown: #5D3A1A;
+    --white: #ffffff;
+    --shadow: 0 8px 32px rgba(93,58,26,0.13);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--brown);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    background: linear-gradient(135deg, #F4A822 0%, #E8631A 60%, #C97D10 100%);
+    padding: 48px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 260px; height: 260px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -40px;
+    width: 320px; height: 320px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    color: white;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    color: white;
+    line-height: 1.1;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.18);
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.92);
+    font-weight: 600;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .emoji-row {
+    font-size: 2rem;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── RAISED TICKER ── */
+  .ticker-bar {
+    background: var(--brown);
+    color: var(--gold);
+    text-align: center;
+    padding: 18px 24px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+  .ticker-bar span {
+    font-size: 2rem;
+    color: #FFD700;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 52px 24px;
+  }
+
+  .section-label {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--brown);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    color: var(--brown);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  /* ── VIDEO SECTION ── */
+  .video-section {
+    background: white;
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+  .video-header {
+    background: linear-gradient(90deg, var(--gold), var(--orange));
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .video-header span {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.25rem;
+    color: white;
+  }
+  .video-placeholder {
+    background: #1a1a1a;
+    aspect-ratio: 16/9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(244,168,34,0.15) 0%, transparent 70%);
+  }
+  .play-btn {
+    width: 80px; height: 80px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.2s, background 0.2s;
+    box-shadow: 0 0 0 16px rgba(244,168,34,0.18);
+  }
+  .play-btn:hover { transform: scale(1.1); background: var(--deep-gold); }
+  .play-btn svg { margin-left: 6px; }
+  .video-caption {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Replace video placeholder with actual video embed once recorded */
+  /* <video> or <iframe> can be dropped in .video-placeholder */
+
+  /* ── ABOUT TAMARIN ── */
+  .tamarin-section {
+    background: white;
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    padding: 40px 40px;
+  }
+  .tamarin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 28px 0;
+  }
+  .tamarin-img {
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(93,58,26,0.15);
+    aspect-ratio: 4/3;
+  }
+  .tamarin-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s;
+  }
+  .tamarin-img:hover img { transform: scale(1.04); }
+  .tamarin-text p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #4a2c0a;
+    margin-bottom: 14px;
+  }
+  .tamarin-text p:last-child { margin-bottom: 0; }
+
+  .fact-chips {
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .chip {
+    background: #FFF3DC;
+    border: 2px solid var(--gold);
+    border-radius: 50px;
+    padding: 6px 18px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--brown);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── SCHOOL SECTION ── */
+  .school-section {
+    background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    padding: 40px;
+    border: 3px solid #c8e6c9;
+  }
+  .school-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .school-icon {
+    width: 72px; height: 72px;
+    background: var(--light-green);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(76,175,80,0.3);
+  }
+  .school-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #2e4a20;
+    margin-bottom: 10px;
+  }
+  .teacher-spotlight {
+    background: white;
+    border-radius: 18px;
+    padding: 20px 24px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-left: 6px solid var(--light-green);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  }
+  .teacher-avatar {
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+  .teacher-info strong {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    color: var(--green);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .teacher-info p {
+    font-size: 0.92rem;
+    color: #4a7c59;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ── DIVIDER ── */
+  .paw-divider {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--gold);
+    padding: 8px 0;
+    letter-spacing: 12px;
+  }
+
+  /* ── DONATION SECTION ── */
+  .donate-section {
+    background: linear-gradient(135deg, var(--brown) 0%, #3d2010 100%);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    padding: 48px 40px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .donate-section::before {
+    content: '🦁';
+    position: absolute;
+    font-size: 180px;
+    right: -20px;
+    bottom: -30px;
+    opacity: 0.07;
+    line-height: 1;
+  }
+  .donate-section h2 { color: var(--gold); }
+  .donate-section .section-label {
+    background: var(--gold);
+    color: var(--brown);
+  }
+
+  .match-banner {
+    background: linear-gradient(90deg, var(--gold), var(--orange));
+    border-radius: 16px;
+    padding: 18px 24px;
+    margin: 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--brown);
+    box-shadow: 0 4px 20px rgba(244,168,34,0.35);
+  }
+  .match-banner .match-icon { font-size: 2rem; flex-shrink: 0; }
+
+  .total-raised {
+    background: rgba(255,255,255,0.07);
+    border: 3px solid var(--gold);
+    border-radius: 20px;
+    padding: 28px 32px;
+    text-align: center;
+    margin: 28px 0;
+  }
+  .total-raised-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+  }
+  .total-raised-amount {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.8rem, 8vw, 4.5rem);
+    color: #FFD700;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(255,215,0,0.4);
+  }
+  .total-raised-note {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  .donate-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .donate-card {
+    background: rgba(255,255,255,0.06);
+    border: 2px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+  .donate-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    background: rgba(244,168,34,0.1);
+  }
+  .donate-card-logo {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+  }
+  .donate-card-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 6px;
+  }
+  .donate-card-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.5;
+  }
+  .donate-card-btn {
+    display: inline-block;
+    margin-top: 16px;
+    background: var(--gold);
+    color: var(--brown);
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 10px 24px;
+    border-radius: 50px;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .donate-card:hover .donate-card-btn {
+    background: #FFD700;
+    transform: scale(1.05);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 36px 24px;
+    color: rgba(93,58,26,0.55);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+  footer strong { color: var(--brown); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .float { animation: float 3.5s ease-in-out infinite; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease forwards; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .tamarin-grid { grid-template-columns: 1fr; }
+    .donate-options { grid-template-columns: 1fr; }
+    .school-card { flex-direction: column; }
+    .tamarin-section, .school-section, .donate-section { padding: 28px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<div class="hero">
+  <div class="hero-badge">🏫 Birdrock Elementary · 1st Grade · Community Outreach</div>
+  <h1>Help Me Save the<br>Golden Lion Tamarin! 🦁</h1>
+  <p class="hero-sub">A fundraiser by a Birdrock Elementary 1st grader who loves animals 💛</p>
+  <div class="emoji-row float">🌿 🐒 🌿</div>
+</div>
+
+<!-- ══════════════ RAISED TICKER ══════════════ -->
+<div class="ticker-bar">
+  Total raised so far: <span id="ticker-amount">$0.00</span> &nbsp;🎉 Keep it going!
+</div>
+
+<!-- ══════════════ VIDEO ══════════════ -->
+<div class="section" style="padding-bottom: 0;">
+  <div class="video-section fade-up">
+    <div class="video-header">
+      <span>🎥 A Message From Me!</span>
+    </div>
+    <!-- ─────────────────────────────────────────────────────────────────────
+         TO ADD YOUR VIDEO: replace the .video-placeholder div below with:
+         <video controls style="width:100%;display:block;" poster="your-thumbnail.jpg">
+           <source src="your-video.mp4" type="video/mp4">
+         </video>
+    <div class="video-placeholder" id="video-area">
+      <div class="play-btn">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <p class="video-caption">📹 My video will appear here once I record it!</p>
+    </div>
+
+    <video controls style="height:100%;width:100%;display:block;" poster="./GabisThumbnail.jpg">
+      <source src="https://www.youtube.com/shorts/f8ys6v7L9fc" type="video/mp4">
+    </video>
+    ───────────────────────────────────────────────────────────────────── -->
+
+    <div style="position:relative; width:100%; padding-bottom:177.78%; height:0;">
+      <iframe
+        src="https://www.youtube.com/embed/f8ys6v7L9fc"
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="position:absolute; top:0; left:0; width:100%; height:100%;"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════ ABOUT TAMARIN ══════════════ -->
+<div class="section">
+  <div class="tamarin-section">
+    <div class="section-label">About the Cause</div>
+    <h2>Meet the Golden Lion Tamarin 🌟</h2>
+    <div class="tamarin-grid">
+      <div class="tamarin-img">
+        <img
+          src="https://zooatlanta.org/wp-content/uploads/2017/01/conservation_goldlenliontamarin-750x500.jpg"
+          alt="Golden Lion Tamarin close-up portrait"
+          loading="lazy"
+        >
+      </div>
+      <div class="tamarin-img">
+        <img
+          src="https://pbs.twimg.com/media/DuZad17XQAI3ubz.jpg"
+          alt="Golden Lion Tamarin in rainforest tree"
+          loading="lazy"
+        >
+      </div>
+    </div>
+    <div class="tamarin-text">
+      <p>The <strong>Golden Lion Tamarin</strong> is a tiny, gorgeous monkey with bright golden fur — kind of like a little lion! They live in the Atlantic Coastal rainforests of <strong>Brazil</strong>, and they are one of the most endangered primates on Earth.</p>
+      <p>Humans have cut down <strong>over 93% of their forest home</strong> to build farms and cities, leaving fewer than 2,500 Golden Lion Tamarins in the wild today. They are listed as <strong>Endangered</strong> on the IUCN Red List, which means they could disappear from our planet forever without help.</p>
+      <p>Conservation programs work hard to protect the remaining forest, breed Tamarins in zoos, and release them back into the wild. Every donation helps fund these efforts — and even a small amount can make a big difference! 🌱</p>
+    </div>
+    <div class="fact-chips">
+      <div class="chip">🦁 Under 2,500 left in the wild</div>
+      <div class="chip">🌳 93% of habitat lost</div>
+      <div class="chip">🇧🇷 Found only in Brazil</div>
+      <div class="chip">⚖️ Weighs less than a pound</div>
+      <div class="chip">🔴 IUCN: Endangered</div>
+    </div>
+  </div>
+</div>
+
+<div class="paw-divider">🐾 🐾 🐾</div>
+
+<!-- ══════════════ SCHOOL SECTION ══════════════ -->
+<div class="section" style="padding-top: 0;">
+  <div class="school-section">
+    <div class="section-label">Our School</div>
+    <h2>Birdrock Elementary 🏫</h2>
+    <div class="school-card">
+      <div class="school-icon">🌊</div>
+      <div class="school-text">
+        <p><strong>Birdrock Elementary School</strong> is located right here in beautiful <strong>La Jolla, San Diego</strong> — just steps from the ocean! Our school is a special place where kids learn to love learning, help their community, and take care of the world around them.</p>
+        <p>Every month, 1st graders take part in a <strong>Community Outreach Program</strong> where we pick a cause we care about and try to make a real difference. This month, I chose to help the Golden Lion Tamarin because I think every animal deserves a home! 🐒💛</p>
+      </div>
+    </div>
+    <div class="teacher-spotlight">
+      <div class="teacher-avatar">⭐</div>
+      <div class="teacher-info">
+        <strong>Ms. Nelson — The Best Teacher Ever!</strong>
+        <p>Ms. Nelson leads our Community Outreach Program and is the reason I even knew about endangered animals! She teaches us that kindness matters — not just to people, but to animals and the planet too. She is awesome, and we are so lucky to have her. Thank you, Ms. Nelson! 🍎</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ DONATION SECTION ══════════════ -->
+<div class="section" style="padding-top: 0;">
+  <div class="donate-section">
+    <div class="section-label">Donate Now</div>
+    <h2>Every Dollar Saves a Tamarin! 💛</h2>
+    <p style="color:rgba(255,255,255,0.75); font-size:1rem; line-height:1.7; margin-bottom: 4px;">
+      You can donate through <strong style="color:var(--gold);">Venmo</strong> or <strong style="color:var(--gold);">GoFundMe</strong> — whichever is easier for you. No donation is too small. Even $1 helps!   (**Note that GoFundMe charges fees so Venmo is preferred.)
+    </p>
+
+
+    <!-- PARENT MATCH BANNER -->
+    <div class="match-banner">
+      <div class="match-icon">🤝</div>
+      <div>
+        <div style="font-size:1.1rem;">My parents will <u>match every donation</u> up to a total of <strong>$1,000</strong>!</div>
+        <div style="font-size:0.88rem; margin-top:3px; font-weight:600;">That means your $10 becomes $20 — your gift goes twice as far! 🎉</div>
+      </div>
+    </div>
+
+    <!-- TOTAL RAISED BOX -->
+    <div class="total-raised">
+      <div class="total-raised-label">💰 Total Amount Raised</div>
+      <div class="total-raised-amount" id="total-display">$0.00</div>
+      <div class="total-raised-note">Updated manually — ask a parent to help update this number!</div>
+    </div>
+
+    <!-- DONATION PLATFORM CARDS -->
+    <div class="donate-options">
+
+      <!-- VENMO -->
+      <a href="https://venmo.com/u/Elizabeta-Memca" target="_blank" rel="noopener" class="donate-card">
+        <div class="donate-card-logo">💙</div>
+        <div class="donate-card-name">Venmo</div>
+        <div class="donate-card-desc">
+          Send your donation directly via Venmo.<br>
+          <strong style="color:rgba(255,255,255,0.85);">@Elizabeta-Memca</strong><br>
+        </div>
+        <div class="donate-card-btn">Open Venmo →</div>
+      </a>
+
+      <!-- GOFUNDME -->
+      <a href="https://gofund.me/ad99493c7" target="_blank" rel="noopener" class="donate-card">
+        <div class="donate-card-logo">💚</div>
+        <div class="donate-card-name">GoFundMe</div>
+        <div class="donate-card-desc">
+          Donate securely through GoFundMe.<br>
+          Supports credit &amp; debit cards.<br>
+        </div>
+        <div class="donate-card-btn">Go to GoFundMe →</div>
+      </a>
+
+    </div>
+
+    <p style="color:rgba(255,255,255,0.4); font-size:0.8rem; text-align:center; margin-top:22px;">
+      ℹ️ All donations are managed by a parent/guardian. For questions, please reach out to us directly.
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  Made with ❤️ by a <strong>1st Grader at Birdrock Elementary</strong> in San Diego, CA<br>
+  Community Outreach Program · Led by <strong>Ms. Nelson</strong><br>
+  🦁 Together we can help the Golden Lion Tamarin survive! 🌿
+</footer>
+
+<script>
+  // ── Sync both "total raised" displays ──
+  // To update the amount, change this one number:
+  const TOTAL_RAISED = 30.00;
+
+  function fmt(n) {
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  document.getElementById('ticker-amount').textContent = fmt(TOTAL_RAISED);
+  document.getElementById('total-display').textContent  = fmt(TOTAL_RAISED);
+
+  // ── Scroll-triggered fade-in ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.tamarin-section, .school-section, .donate-section').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
