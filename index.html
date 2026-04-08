@@ -608,7 +608,7 @@
     <div class="total-raised">
       <div class="total-raised-label">💰 Total Amount Raised</div>
       <div class="total-raised-amount" id="total-display">$0.00</div>
-      <div class="total-raised-note">As of 4/7/26 @20:45 PST - Updated manually</div>
+      <div class="total-raised-note" id="total-raised-note">As of 4/7/26 @20:45 PST - Updated manually</div>
     </div>
 
     <!-- DONATION PLATFORM CARDS -->
@@ -655,6 +655,7 @@
   // ── Sync both "total raised" displays ──
   // To update the amount, change this one number:
   const TOTAL_RAISED = 410.00;
+  const TOTAL_RAISED_NOTE = "As of 4/7/26 @20:45 PST - Updated manually-"
 
   function fmt(n) {
     return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -662,6 +663,7 @@
 
   document.getElementById('ticker-amount').textContent = fmt(TOTAL_RAISED);
   document.getElementById('total-display').textContent  = fmt(TOTAL_RAISED);
+  document.getElementById('total-raised-note').textContent  = TOTAL_RAISED_NOTE;
 
   // ── Scroll-triggered fade-in ──
   const observer = new IntersectionObserver((entries) => {
