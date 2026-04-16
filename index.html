@@ -475,12 +475,28 @@
     outline: none !important;
   }
 
+  .behind-the-scenes-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 999px;
+    padding: 8px 20px;
+    transition: background 0.2s;
+  }
+  .behind-the-scenes-link:hover { background: rgba(255,255,255,0.28); }
 
   /* ── FOOTER ── */
   footer {
+    background: var(--gold);
     text-align: center;
     padding: 20px 24px;
-    color: rgba(93,58,26,0.55);
+    /* color: rgba(93,58,26,0.55); */
     font-size: 0.88rem;
     line-height: 1.7;
   }
@@ -517,6 +533,7 @@
   <p class="hero-sub">A fundraiser by a <a href="https://birdrock.sandiegounified.org/" target="_blank" style="color: inherit; text-decoration: underline;">Bird Rock Elementary</a> 1st grader who loves animals 💛</p>
   <p class="hero-sub" style="font-size: 14px; margin-top: 0px; line-height: 0.2;">In support of the <a href="https://zooatlanta.org/project/golden-lion-tamarin/" target="_blank" style="color: inherit; text-decoration: underline;">Atlanta Zoo</a></p>
   <div class="emoji-row float">🌿 🐒 🌿</div>
+  <a class="behind-the-scenes-link" href="./behind-the-scenes.html">See The Work Behind The Scenes →</a>
 </div>
 
 <!-- ══════════════ RAISED TICKER ══════════════ -->
@@ -685,14 +702,15 @@
       ℹ️ All donations are managed by a parent/guardian. For any questions, <a href="mailto:<memfam-gabisfundraiser@yahoo.com>?subject=Inquiry%20About%20Fundraiser" style="color: inherit; text-decoration: underline;">please email us</a> directly.
     </p>
   </div>
-  <a href="#" style="display: block; text-align: center; color: black; font-weight: bold; text-decoration: none; padding-top: 40px;">Back to Top</a>
 </div>
 
 <!-- ══════════════ FOOTER ══════════════ -->
 <footer>
   Made with ❤️ by a <strong>1st Grader at <a href="https://birdrock.sandiegounified.org/" target="_blank" style="color: inherit; text-decoration: underline;">Bird Rock Elementary</a></strong> in San Diego, CA<br>
   Community Outreach Program · Led by <strong>Ms. Nelson</strong> · Supported by <strong>Torey Pines Rotary Club</strong><br>
-  🦁 Together we can help the Golden Lion Tamarin survive! 🌿
+  🦁 Together we can help the Golden Lion Tamarin survive! 🌿<br><br>
+  <a class="behind-the-scenes-link" href="./behind-the-scenes.html">See The Work Behind The Scenes →</a>
+  <a href="#" style="display: block; text-align: center; color: black; font-weight: bold; text-decoration: none; padding-top: 40px;">Back to Top</a>
 </footer>
 
 <script>

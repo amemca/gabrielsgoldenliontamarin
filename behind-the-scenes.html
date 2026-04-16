@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Behind the Scenes | Gabriel's Golden Lion Tamarin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold:      #f5c842;
+      --gold-dark: #c9971a;
+      --gold-pale: #fff9e6;
+      --green:     #2d6a2d;
+      --green-mid: #3d8b3d;
+      --green-pale:#e8f5e8;
+      --leaf:      #4caf50;
+      --brown:     #6b3a1f;
+      --brown-pale:#fdf3eb;
+      --white:     #ffffff;
+      --text:      #2c2c2c;
+      --muted:     #666;
+      --radius:    16px;
+      --shadow:    0 4px 20px rgba(0,0,0,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f7fdf3;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--green) 0%, #1a4d1a 60%, #0f3310 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿";
+      position: absolute;
+      top: 8px; left: 0; right: 0;
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      opacity: 0.35;
+    }
+    header::after {
+      content: "🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿";
+      position: absolute;
+      bottom: 8px; left: 0; right: 0;
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      opacity: 0.35;
+    }
+    .header-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--brown);
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 4px 18px;
+      margin-bottom: 1rem;
+    }
+    header h1 {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      color: var(--gold);
+      text-shadow: 2px 3px 0 rgba(0,0,0,0.3);
+      margin-bottom: 0.5rem;
+    }
+    header p.subtitle {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      max-width: 560px;
+      margin: 0 auto 1.4rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      padding: 8px 20px;
+      transition: background 0.2s;
+    }
+    .back-link:hover { background: rgba(255,255,255,0.28); }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+
+    /* ── INTRO BANNER ── */
+    .intro-banner {
+      background: var(--gold-pale);
+      border: 2px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 2rem 2rem 1.8rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .intro-banner .icon-row {
+      font-size: 2.2rem;
+      margin-bottom: 0.6rem;
+      letter-spacing: 6px;
+    }
+    .intro-banner h2 {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 1.7rem;
+      color: var(--green);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.8rem;
+    }
+    .intro-banner p {
+      color: var(--brown);
+      font-size: 1rem;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.4rem;
+    }
+    .section-header .icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .section-header h2 {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 1.55rem;
+      color: var(--green);
+      letter-spacing: 0.03em;
+    }
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+      border-radius: 4px;
+      margin-bottom: 1.8rem;
+    }
+
+    /* ── PROMPT SECTION ── */
+    .prompt-section {
+      background: var(--white);
+      border: 1.5px solid #d0e8d0;
+      border-radius: var(--radius);
+      padding: 1.8rem 2rem;
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow);
+    }
+    .prompt-label {
+      display: inline-block;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 6px;
+      padding: 3px 12px;
+      margin-bottom: 1rem;
+    }
+    .prompt-placeholder {
+      background: #f3faf3;
+      border: 2px dashed #a8d5a8;
+      border-radius: 10px;
+      padding: 1.5rem 1.5rem;
+      font-size: 0.97rem;
+      color: var(--muted);
+      font-style: italic;
+      min-height: 120px;
+      line-height: 1.8;
+    }
+    .prompt-placeholder strong {
+      display: block;
+      color: var(--green);
+      font-style: normal;
+      font-weight: 800;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .prompt-note {
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .prompt-note em {
+      color: var(--green-mid);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    /* ── VIDEO BLOOPER SECTION ── */
+    .video-section {
+      background: var(--white);
+      border: 1.5px solid #e0ece0;
+      border-radius: var(--radius);
+      padding: 1.8rem 2rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .video-section-title {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 1.2rem;
+      color: var(--brown);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+    }
+    .video-section-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .attempt-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      color: var(--green);
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+    }
+    .attempt-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      background: var(--gold);
+      color: var(--brown);
+      border-radius: 50%;
+      font-weight: 900;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .video-placeholder {
+      background: #f5f5f5;
+      border: 2px dashed #c8dfc8;
+      border-radius: 12px;
+      padding: 2rem 1rem;
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .video-placeholder:hover {
+      border-color: var(--green-mid);
+      background: #eff7ef;
+    }
+    .video-placeholder .play-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .video-placeholder strong {
+      display: block;
+      color: var(--green);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Actual embedded video */
+    .video-embed-wrapper {
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      background: #000;
+      position: relative;
+      padding-top: 56.25%;
+    }
+    .video-embed-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* ── FINAL VIDEO (the published one) ── */
+    .final-video-card {
+      background: linear-gradient(135deg, var(--green-pale), #d4edda);
+      border: 2px solid var(--leaf);
+      border-radius: 12px;
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 1.6rem;
+    }
+    .final-video-card .star-badge {
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+    .final-video-card .info h4 {
+      font-weight: 800;
+      color: var(--green);
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    .final-video-card .info p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 3rem;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1.5px solid #e0ece0;
+      border-radius: var(--radius);
+      padding: 1.2rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .stat-card .num {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 2.2rem;
+      color: var(--gold-dark);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-card .lbl {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── MOTTO SECTION ── */
+    .motto-section {
+      background: linear-gradient(135deg, #1a4d1a 0%, #0f3310 100%);
+      border-radius: var(--radius);
+      padding: 2.8rem 2.2rem;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .motto-section::before {
+      content: "⭐";
+      position: absolute;
+      font-size: 8rem;
+      opacity: 0.06;
+      top: -20px; right: -10px;
+    }
+    .motto-section .quote-mark {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 4rem;
+      color: var(--gold);
+      line-height: 0.6;
+      display: block;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+    .motto-section h2 {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 1.5rem;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.2rem;
+    }
+    .motto-section p {
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.9);
+      max-width: 620px;
+      margin: 0 auto 1.2rem;
+    }
+    .motto-section p:last-child { margin-bottom: 0; }
+    .motto-highlight {
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green);
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      font-size: 0.88rem;
+      padding: 1.6rem 1rem;
+      line-height: 1.8;
+    }
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    @media (max-width: 520px) {
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+      .stats-bar .stat-card:last-child { grid-column: 1 / -1; }
+      header h1 { font-size: 2rem; }
+      .prompt-section, .video-section { padding: 1.2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <div class="header-badge">🎬 Behind the Scenes</div>
+  <h1>The Real Work Behind<br>the Tamarin Story</h1>
+  <p class="subtitle">How Gabriel built his fundraiser — from first draft to final product — one try at a time.</p>
+  <a class="back-link" href="../index.html">← Back to the main page</a>
+</header>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<main>
+
+  <!-- INTRO BANNER -->
+  <div class="intro-banner">
+    <div class="icon-row">🎬 🦁 💪</div>
+    <h2>The Public Sees the Spotlight.<br>This Page Shows the Stage.</h2>
+    <p>
+      Every great story has an untold side — the practice runs, the restarts, the "one more time" moments.
+      Gabriel's fundraiser looks polished and confident because of what you <em>don't</em> usually see.
+      That changes here.
+    </p>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="num">2</div>
+      <div class="lbl">Published Videos</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">22</div>
+      <div class="lbl">Trial Takes (See them all below)</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">1</div>
+      <div class="lbl">VERY Determined 1st Grader</div>
+    </div>
+  </div>
+
+
+  <!-- ══ PROMPT SECTION (mid-page) ══ -->
+  <div class="section-header">
+    <span class="icon">💡</span>
+    <h2>The Prompt That Started It All</h2>
+  </div>
+  <div class="section-divider"></div>
+
+  <div class="prompt-section">
+    <span class="prompt-label">Gabriel's Original Prompt</span>
+    <div class="prompt-placeholder">
+      I need to create a single web page for taking in donations. The cause for the donations is in support of the Golden Lion Tamarin, because they are an endangered species.
+      <br><br>
+      I am a first-grade student at Birdrock Elementary in San Diego, and this is part of a monthly community outreach program.
+      <br><br>
+      The page should have a video that I will record at the top. We will have multiple options for a donation, namely Venmo and GoFundMe. Please add a note that my parents will match donations up to $1000.
+      <br><br>
+      The web page should expand on why the Tamarin is endangered, in a few sentences along with a picture or two.
+      <br><br>
+      The page should also give few details about my school, especially about my teacher Ms. Nelson, who is awesome and leads the community outreach program.
+      <br><br>
+      The donation section should be at the end, and we should have a bold text showing the total amount raised up to date.
+    </div>
+    <p class="prompt-note">
+      This is the seed of everything. A <em>1st grader's words</em> set a whole webpage, two videos, and a conservation mission in motion.
+      That's the power of asking — and then doing the work.
+    </p>
+  </div>
+
+
+  <!-- ══ VIDEO 1 BLOOPERS ══ -->
+  <div class="section-header">
+    <span class="icon">🎥</span>
+    <h2>The "Message from me" Video Bloopers</h2>
+  </div>
+  <div class="section-divider"></div>
+
+  <div class="video-section">
+    <p class="video-section-title">The Journey to "Action!" — The Takes It Took</p>
+    <p class="video-section-desc">
+      The final version looks easy. Here's what came before it — every attempt that taught Gabriel something new.
+    </p>
+
+    <!-- ATTEMPT 1 -->
+    <div class="attempt-label">
+      <span class="attempt-num">1</span>
+      Trial Take #1 - Full free style video to see how Gabriel acts on camera
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/k-frCJmEv34" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 2 -->
+    <div class="attempt-label">
+      <span class="attempt-num">2</span>
+      Trial Take #2
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/YC5oSkMJPXM" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 3 -->
+    <div class="attempt-label">
+      <span class="attempt-num">3</span>
+      Trial Take #3
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/3Z8Kxw_1t_I" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 4 -->
+    <div class="attempt-label">
+      <span class="attempt-num">4</span>
+      Trial Take #4
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/UNmvPuwJ4jk" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 5 -->
+    <div class="attempt-label">
+      <span class="attempt-num">5</span>
+      Trial Take #5
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/wJWbAUscvWs" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 6 -->
+    <div class="attempt-label">
+      <span class="attempt-num">6</span>
+      Trial Take #6
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/gXWc957_mNw" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 7 -->
+    <div class="attempt-label">
+      <span class="attempt-num">7</span>
+      Trial Take #7
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/WPt_14YFRvo" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 8 -->
+    <div class="attempt-label">
+      <span class="attempt-num">8</span>
+      Trial Take #8
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/8_JklmpoYWQ" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 9 -->
+    <div class="attempt-label">
+      <span class="attempt-num">9</span>
+      Trial Take #9
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/xrYOzB8TB54" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 10 -->
+    <div class="attempt-label">
+      <span class="attempt-num">10</span>
+      Trial Take #10
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/QTsJPa4Kq7o" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 11 -->
+    <div class="attempt-label">
+      <span class="attempt-num">11</span>
+      Trial Take #11
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/5HVoc5WZgqc" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 12 -->
+    <div class="attempt-label">
+      <span class="attempt-num">12</span>
+      Trial Take #12
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/aLbZT2EQ52Y" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 13 -->
+    <div class="attempt-label">
+      <span class="attempt-num">13</span>
+      Trial Take #13
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/ALdU4PCfVFU" allowfullscreen></iframe>
+    </div>
+
+    <!-- THE FINAL -->
+    <div class="final-video-card">
+      <span class="star-badge">🌟</span>
+      <div class="info">
+        <h4>The Published Video — The One That Made It!</h4>
+        <p>After all those tries, this is the take Gabriel was proud of. It's on the main page — because he earned it.</p>
+      </div>
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/f8ys6v7L9fc" allowfullscreen></iframe>
+    </div>
+  </div>
+
+
+  <!-- ══ VIDEO 2 BLOOPERS ══ -->
+  <div class="section-header">
+    <span class="icon">🎥</span>
+    <h2>B1-Starfish Class Video Bloopers</h2>
+  </div>
+  <div class="section-divider"></div>
+
+  <div class="video-section">
+    <p class="video-section-title">From Rehearsal to Reality</p>
+    <p class="video-section-desc">
+      Showcasing his classroom and teacher Ms. Nelson wasn't easy to get just right. Here are the practice runs that led there.
+    </p>
+
+    <!-- ATTEMPT 1 -->
+    <div class="attempt-label">
+      <span class="attempt-num">1</span>
+      Trial Take #1
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/DNhG_gM2dQw" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 2 -->
+    <div class="attempt-label">
+      <span class="attempt-num">2</span>
+      Trial Take #2
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/AJOXddw1QtY" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 3 -->
+    <div class="attempt-label">
+      <span class="attempt-num">3</span>
+      Trial Take #3
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/NzZKZv2CHbs" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 4 -->
+    <div class="attempt-label">
+      <span class="attempt-num">4</span>
+      Trial Take #4
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/i7pdABT6kqY" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 5 -->
+    <div class="attempt-label">
+      <span class="attempt-num">5</span>
+      Trial Take #5
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/RRPjnKFWoww" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 6 -->
+    <div class="attempt-label">
+      <span class="attempt-num">6</span>
+      Trial Take #6
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/-wTNmpMXG8A" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 7 -->
+    <div class="attempt-label">
+      <span class="attempt-num">7</span>
+      Trial Take #7
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/gWAdpcJvtl0" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 8 -->
+    <div class="attempt-label">
+      <span class="attempt-num">8</span>
+      Trial Take #8
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/pQm-YgWfThg" allowfullscreen></iframe>
+    </div>
+
+    <!-- ATTEMPT 9 -->
+    <div class="attempt-label">
+      <span class="attempt-num">9</span>
+      Trial Take #9
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/qK3-EwsXF9A" allowfullscreen></iframe>
+    </div>
+
+    <!-- THE FINAL -->
+    <div class="final-video-card">
+      <span class="star-badge">🌟</span>
+      <div class="info">
+        <h4>The Published Video — The One That Made It!</h4>
+        <p>Every restart made this one better. That's not luck — that's a kid who never gave up.</p>
+      </div>
+    </div>
+    <div class="video-embed-wrapper">
+      <iframe src="https://www.youtube.com/embed/019SHAJHWJQ" allowfullscreen></iframe>
+    </div>
+  </div>
+
+
+  <!-- ══ MOTTO / INSPIRATION SECTION ══ -->
+  <div class="section-header">
+    <span class="icon">⭐</span>
+    <h2>A Message for Every Kid Who Wants to Try</h2>
+  </div>
+  <div class="section-divider"></div>
+
+  <div class="motto-section">
+    <span class="quote-mark">"</span>
+    <h2>Hard Work Hides Behind Every Great Story</h2>
+    <p>
+      When you watch Gabriel's videos on his fundraiser page, they look smooth, confident, and easy.
+      But this page tells the truth: <span class="motto-highlight">nothing great starts perfect.</span>
+      There were attempts that got cut off, moments where he had to start over, and takes where the words
+      just didn't come out right. And every single one of those moments made the final version better.
+    </p>
+    <p>
+      Gabriel is a first grader who cares deeply about animals and the planet.
+      He didn't wait until he was older. He didn't wait until it was easy.
+      He picked a cause, asked for help, and then <span class="motto-highlight">did the work</span> — again and again — until he got it right.
+    </p>
+    <p>
+      The world only sees the finished page, the polished video, the fundraiser total climbing.
+      But behind every successful story is a kid (or a person of any age) who tried, failed quietly,
+      and tried again. That invisible effort is <span class="motto-highlight">the most important part</span>.
+    </p>
+    <p>
+      So if you have an idea — a cause you care about, an animal you want to protect, a difference you want to make —
+      start. Make the messy first attempt. Record the blooper. Write the rough draft.
+      Because <span class="motto-highlight">the only way to have a finished story is to begin an unfinished one.</span>
+    </p>
+    <p style="margin-top: 1.6rem; font-size: 0.9rem; color: var(--gold); font-weight: 700; letter-spacing: 0.05em;">
+      🦁 Be part of this world — not just in it. 🌿
+    </p>
+  </div>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  Made with ❤️ by a <strong>1st Grader at <a href="https://birdrock.sandiegounified.org/">Bird Rock Elementary</a></strong> in San Diego, CA<br>
+  Community Outreach Program · Led by <strong>Ms. Nelson</strong> · Supported by <strong>Torey Pines Rotary Club</strong><br>
+  🦁 Together we can help the Golden Lion Tamarin survive! 🌿<br><br>
+  <a href="../index.html">← Back to the main page</a>
+</footer>
+
+</body>
+</html>
